@@ -331,3 +331,80 @@ button:focus-visible {
 .btn-primary:hover {
   background-color: #e63e00;
 }
+
+/* Watch page – details card (compact below video) */
+.watch-details-card {
+  background-color: #121214;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+[data-theme="light"] .watch-details-card {
+  background-color: #ffffff;
+  border-color: #ebebeb;
+}
+.watch-details-title {
+  color: #e8e8e8;
+}
+[data-theme="light"] .watch-details-title {
+  color: #1a1a1a;
+}
+.watch-details-sep {
+  color: #6b6d70;
+}
+
+/* Watch page – show more pill button */
+.watch-show-more-pill {
+  background-color: rgba(255, 69, 0, 0.15);
+  color: #ff4500;
+  border: 1px solid rgba(255, 69, 0, 0.3);
+}
+.watch-show-more-pill:hover {
+  background-color: rgba(255, 69, 0, 0.25);
+  border-color: rgba(255, 69, 0, 0.5);
+}
+[data-theme="light"] .watch-show-more-pill {
+  background-color: rgba(255, 69, 0, 0.1);
+  color: #e63e00;
+  border-color: rgba(255, 69, 0, 0.25);
+}
+[data-theme="light"] .watch-show-more-pill:hover {
+  background-color: rgba(255, 69, 0, 0.2);
+  border-color: rgba(255, 69, 0, 0.4);
+}
+
+
+/* Watch page – recommended card */
+.watch-recommended-card {
+  color: #d7dadc;
+}
+.watch-recommended-card:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+.watch-recommended-card-active {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+.watch-recommended-card:hover .watch-recommended-title,
+.watch-recommended-card-active .watch-recommended-title {
+  color: #ff4500;
+}
+.watch-recommended-channel,
+.watch-recommended-meta {
+  color: #818384;
+}
+.watch-recommended-play-btn {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #0c0c0d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+[data-theme="light"] .watch-recommended-card {
+  color: #1c1c1c;
+}
+[data-theme="light"] .watch-recommended-card:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .watch-recommended-card-active {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+[data-theme="light"] .watch-recommended-channel,
+[data-theme="light"] .watch-recommended-meta {
+  color: #525252;
+}
