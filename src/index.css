@@ -1,12 +1,12 @@
+@import "tailwindcss";
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color-scheme: dark;
+  color: #d7dadc;
+  background-color: #0c0c0d;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,54 +15,97 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #d7dadc;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #ff4500;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #0c0c0d;
+  color: #d7dadc;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: #d7dadc;
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid #343536;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #272729;
+  color: #d7dadc;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #ff4500;
+  background-color: #1a1a1b;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid #ff4500;
+  outline-offset: 2px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.navbar-logo {
+  font-weight: 900;
+}
+
+.theme-toggle-btn {
+  border-radius: 9999px !important;
+  padding: 0 !important;
+  border: none !important;
+}
+.theme-toggle-btn svg {
+  color: inherit;
+}
+
+.page-title {
+  color: #d7dadc;
+}
+.page-description {
+  color: #818384;
+}
+
+/* Light theme */
+[data-theme="light"] {
+  color-scheme: light;
+}
+[data-theme="light"] body,
+[data-theme="light"] :root {
+  background-color: #f6f6f6;
+  color: #1c1c1c;
+}
+[data-theme="light"] a {
+  color: #1c1c1c;
+}
+[data-theme="light"] a:hover {
+  color: #ff4500;
+}
+[data-theme="light"] h1,
+[data-theme="light"] .page-title {
+  color: #1c1c1c;
+}
+[data-theme="light"] .page-description {
+  color: #525252;
+}
+[data-theme="light"] button {
+  background-color: #e5e5e5;
+  color: #1c1c1c;
+  border-color: #d4d4d4;
+}
+[data-theme="light"] button:hover {
+  background-color: #d4d4d4;
+  border-color: #ff4500;
 }
