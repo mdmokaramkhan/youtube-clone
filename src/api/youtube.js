@@ -1,9 +1,7 @@
 const API_BASE = "https://youtube.googleapis.com/youtube/v3"
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY
 
-/**
- * Fetch trending videos from YouTube Data API v3 (Search)
- */
+// trending videos
 export async function fetchVideos({ maxResults = 25 } = {}) {
   const q = "trending"
   const url = `${API_BASE}/search?part=snippet&type=video&maxResults=${maxResults}&q=${encodeURIComponent(q)}&key=${API_KEY}`
@@ -23,9 +21,7 @@ export async function fetchVideos({ maxResults = 25 } = {}) {
   return data.items || []
 }
 
-/**
- * Fetch video details (snippet, statistics) for a single video
- */
+// single video details
 export async function fetchVideoDetails(videoId) {
   const url = `${API_BASE}/videos?part=snippet,statistics&id=${videoId}&key=${API_KEY}`
 
@@ -44,10 +40,7 @@ export async function fetchVideoDetails(videoId) {
   return data.items?.[0] ?? null
 }
 
-/**
- * Fetch videos from a channel (used for "recommended" / more from same channel).
- * relatedToVideoId is deprecated and returns 400, so we use channelId instead.
- */
+// videos from same channel (for recommended)
 export async function fetchChannelVideos(
   channelId,
   { maxResults = 20, excludeVideoId } = {}
@@ -75,9 +68,7 @@ export async function fetchChannelVideos(
   return items
 }
 
-/**
- * Fetch top-level comments for a video (commentThreads.list)
- */
+// video comments
 export async function fetchVideoComments(videoId, { maxResults = 20 } = {}) {
   const url = `${API_BASE}/commentThreads?part=snippet&videoId=${videoId}&maxResults=${maxResults}&order=relevance&textFormat=plainText&key=${API_KEY}`
 

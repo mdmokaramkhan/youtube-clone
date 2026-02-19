@@ -7,11 +7,9 @@ import {
   fetchVideos,
   fetchVideoComments,
 } from "../api/youtube"
+import { addToWatchHistory } from "../utils/watchHistory"
 import WatchRecommendedCard from "../components/WatchRecommendedCard"
 
-/**
- * Format view count (e.g. 1234567 → "1.2M views")
- */
 function formatViews(countStr) {
   const count = parseInt(countStr, 10)
   if (isNaN(count)) return ""
@@ -27,9 +25,6 @@ function formatViews(countStr) {
   return `${count} views`
 }
 
-/**
- * Format ISO date to relative time (e.g. "2 days ago")
- */
 function timeAgo(dateStr) {
   const date = new Date(dateStr)
   const now = new Date()
@@ -52,9 +47,6 @@ function timeAgo(dateStr) {
   return "just now"
 }
 
-/**
- * Format publish date (e.g. "Feb 18, 2025")
- */
 function formatDate(dateStr) {
   const date = new Date(dateStr)
   return date.toLocaleDateString("en-US", {
@@ -181,6 +173,24 @@ export default function Watch() {
       cancelled = true
     }
   }, [videoId])
+
+  // save to history
+  useEffect(() => {
+    if (!videoId || !videoDetails) return
+    const sn = videoDetails?.snippet
+    const thumb =
+      sn?.thumbnails?.maxres?.url ||
+      sn?.thumbnails?.high?.url ||
+      sn?.thumbnails?.medium?.url ||
+      sn?.thumbnails?.default?.url
+    addToWatchHistory({
+      videoId,
+      title: sn?.title || "",
+      channelTitle: sn?.channelTitle || "",
+      thumbnailUrl: thumb || "",
+      publishedAt: sn?.publishedAt,
+    })
+  }, [videoId, videoDetails])
 
   if (!videoId) {
     return (
