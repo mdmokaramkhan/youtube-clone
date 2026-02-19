@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom"
 import { Play, User } from "lucide-react"
 
-/**
- * Format ISO date to relative time (e.g., "2 days ago")
- */
 function timeAgo(dateStr) {
   const date = new Date(dateStr)
   const now = new Date()

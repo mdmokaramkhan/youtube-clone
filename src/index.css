@@ -106,7 +106,7 @@ button:focus-visible {
   background-color: #121214;
   border-radius: 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 0.375rem 0.75rem; /* compact: py-1.5 px-3 */
+  padding: 0.625rem 1rem; /* slightly roomier: ~py-2.5 px-4 */
 }
 [data-theme="light"] .home-heading-card {
   background-color: #ffffff;
@@ -330,4 +330,130 @@ button:focus-visible {
 }
 .btn-primary:hover {
   background-color: #e63e00;
+}
+
+/* Watch page – details card (compact below video) */
+.watch-details-card {
+  background-color: #121214;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+[data-theme="light"] .watch-details-card {
+  background-color: #ffffff;
+  border-color: #ebebeb;
+}
+.watch-details-title {
+  color: #e8e8e8;
+}
+[data-theme="light"] .watch-details-title {
+  color: #1a1a1a;
+}
+.watch-details-sep {
+  color: #6b6d70;
+}
+
+/* Watch page – show more pill button */
+.watch-show-more-pill {
+  background-color: rgba(255, 69, 0, 0.15);
+  color: #ff4500;
+  border: 1px solid rgba(255, 69, 0, 0.3);
+}
+.watch-show-more-pill:hover {
+  background-color: rgba(255, 69, 0, 0.25);
+  border-color: rgba(255, 69, 0, 0.5);
+}
+[data-theme="light"] .watch-show-more-pill {
+  background-color: rgba(255, 69, 0, 0.1);
+  color: #e63e00;
+  border-color: rgba(255, 69, 0, 0.25);
+}
+[data-theme="light"] .watch-show-more-pill:hover {
+  background-color: rgba(255, 69, 0, 0.2);
+  border-color: rgba(255, 69, 0, 0.4);
+}
+
+
+/* Watch page – recommended card */
+.watch-recommended-card {
+  color: #d7dadc;
+}
+.watch-recommended-card:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+.watch-recommended-card-active {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+.watch-recommended-card:hover .watch-recommended-title,
+.watch-recommended-card-active .watch-recommended-title {
+  color: #ff4500;
+}
+.watch-recommended-channel,
+.watch-recommended-meta {
+  color: #818384;
+}
+.watch-recommended-play-btn {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #0c0c0d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+[data-theme="light"] .watch-recommended-card {
+  color: #1c1c1c;
+}
+[data-theme="light"] .watch-recommended-card:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .watch-recommended-card-active {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+[data-theme="light"] .watch-recommended-channel,
+[data-theme="light"] .watch-recommended-meta {
+  color: #525252;
+}
+
+/* Settings – toggle switch */
+.settings-toggle {
+  position: relative;
+  display: inline-flex;
+  height: 1.5rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  border: 1px solid;
+  transition: background-color 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+.settings-toggle:focus {
+  outline: none;
+}
+.settings-toggle:focus-visible {
+  box-shadow: 0 0 0 2px #0c0c0d, 0 0 0 4px #ff4500;
+}
+[data-theme="light"] .settings-toggle:focus-visible {
+  box-shadow: 0 0 0 2px #f6f6f6, 0 0 0 4px #ff4500;
+}
+.settings-toggle[aria-checked="true"] {
+  background-color: #ff4500;
+  border-color: #ff4500;
+}
+.settings-toggle[aria-checked="false"] {
+  background-color: #272729;
+  border-color: #3a3a3f;
+}
+[data-theme="light"] .settings-toggle[aria-checked="false"] {
+  background-color: #e5e5e5;
+  border-color: #d4d4d4;
+}
+.settings-toggle-thumb {
+  pointer-events: none;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: calc(1.5rem - 4px);
+  width: calc(1.5rem - 4px);
+  border-radius: 9999px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+.settings-toggle[aria-checked="true"] .settings-toggle-thumb {
+  transform: translateX(calc(2.75rem - 1.5rem));
 }
