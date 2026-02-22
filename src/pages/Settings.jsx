@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Settings as SettingsIcon, Moon, Sun } from "lucide-react"
 import { useTheme } from "../context/ThemeContext"
+import { getSearchHistory, clearSearchHistory } from "../utils/searchHistory"
 
 function SettingsHeading() {
   return (
@@ -30,7 +31,7 @@ function SettingsHeading() {
 
 function SettingRow({ label, description, children }) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 py-4 first:pt-0 last:pb-0 border-b border-[#272729]/80 last:border-b-0 [data-theme='light']:border-[#e5e5e5]/80">
+    <div className="flex flex-wrap items-center justify-between gap-4 py-4 first:pt-0 last:pb-0 border-b border-[#6b6d70] last:border-b-0 [data-theme='light']:border-neutral-200">
       <div className="min-w-0">
         <p className="text-sm font-medium page-title">{label}</p>
         {description && (
@@ -59,8 +60,23 @@ function Toggle({ checked, onChange, ariaLabel }) {
 
 export default function Settings() {
   const { theme, toggleTheme } = useTheme()
-  const [notifications, setNotifications] = useState(false)
   const [safeSearch, setSafeSearch] = useState(true)
+  const [searchHistory, setSearchHistory] = useState(() => getSearchHistory())
+
+  useEffect(() => {
+    setSearchHistory(getSearchHistory())
+  }, [])
+
+  useEffect(() => {
+    const onFocus = () => setSearchHistory(getSearchHistory())
+    window.addEventListener("focus", onFocus)
+    return () => window.removeEventListener("focus", onFocus)
+  }, [])
+
+  function handleClearSearchHistory() {
+    clearSearchHistory()
+    setSearchHistory([])
+  }
 
   return (
     <div className="p-4 sm:p-5 w-full max-w-full">
@@ -89,28 +105,6 @@ export default function Settings() {
               <span>{theme === "dark" ? "Light" : "Dark"}</span>
             </button>
           </SettingRow>
-          <SettingRow
-            label="Compact density"
-            description="Show more content with tighter spacing"
-          >
-            <span className="text-xs page-description">Off</span>
-          </SettingRow>
-        </div>
-
-        <div className="watch-details-card rounded-lg p-4 sm:p-5 w-full">
-          <h3 className="text-xs font-semibold page-title mb-4 uppercase tracking-wide">
-            Notifications
-          </h3>
-          <SettingRow
-            label="Push notifications"
-            description="Get notified for new uploads from subscriptions"
-          >
-            <Toggle
-              checked={notifications}
-              onChange={setNotifications}
-              ariaLabel="Push notifications"
-            />
-          </SettingRow>
         </div>
 
         <div className="watch-details-card rounded-lg p-4 sm:p-5 w-full">
@@ -138,6 +132,34 @@ export default function Settings() {
               ariaLabel="Safe search"
             />
           </SettingRow>
+        </div>
+
+        <div className="watch-details-card rounded-lg p-4 sm:p-5 w-full">
+          <div className="flex items-center justify-between gap-3 mb-3">
+            <h3 className="text-xs font-semibold page-title uppercase tracking-wide">
+              Search history
+            </h3>
+            {searchHistory.length > 0 && (
+              <button
+                type="button"
+                onClick={handleClearSearchHistory}
+                className="text-xs font-medium text-[#ff4500] hover:underline"
+              >
+                Clear all
+              </button>
+            )}
+          </div>
+          {searchHistory.length === 0 ? (
+            <p className="text-sm page-description">No recent searches.</p>
+          ) : (
+            <ul className="text-sm page-description space-y-2">
+              {searchHistory.slice(0, 5).map((term) => (
+                <li key={term} className="truncate">
+                  {term}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div className="watch-details-card rounded-lg p-4 sm:p-5 w-full">
