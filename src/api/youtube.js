@@ -1,24 +1,22 @@
 const API_BASE = "https://youtube.googleapis.com/youtube/v3"
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY
 
-// trending videos
-export async function fetchVideos({ maxResults = 25 } = {}) {
-  const q = "trending"
-  const url = `${API_BASE}/search?part=snippet&type=video&maxResults=${maxResults}&q=${encodeURIComponent(q)}&key=${API_KEY}`
-
+// search by query
+export async function searchVideos(q, { maxResults = 25 } = {}) {
+  if (!q?.trim()) return []
+  const url = `${API_BASE}/search?part=snippet&type=video&maxResults=${maxResults}&q=${encodeURIComponent(q.trim())}&key=${API_KEY}`
   const response = await fetch(url)
-
   if (!response.ok) {
     const text = await response.text().catch(() => "")
-    throw new Error(
-      `YouTube Search API error (${response.status}): ${
-        text || response.statusText
-      }`
-    )
+    throw new Error(`YouTube Search API error (${response.status}): ${text || response.statusText}`)
   }
-
   const data = await response.json()
   return data.items || []
+}
+
+// trending videos
+export async function fetchVideos({ maxResults = 25 } = {}) {
+  return searchVideos("trending", { maxResults })
 }
 
 // single video details
